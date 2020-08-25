@@ -1,0 +1,281 @@
+* {
+  box-sizing: border-box;
+}
+
+/****************   CHAT-BAR   ****************/
+#chat-bar {
+  width: 17vw;
+  position: absolute;
+  bottom: 0px;
+  left: 1vw;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 0px;
+  border-radius: 1vw 1vw 0px 0px;
+
+  overflow: hidden;
+  z-index: 2;
+}
+#chat-head {
+  width: inherit;
+  height: 8vh;
+  position: relative;
+  padding: 2vh 0vw 1vh 7vw;
+
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+
+  background-color: rgba(2, 68, 112);
+  color: rgb(24, 24, 24);
+
+  cursor: pointer;
+}
+#chat-head h4 {
+  margin: 0px;
+}
+#chat-footer {
+  width: inherit;
+  height: 50px;
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+
+  background-color: black;
+}
+#chat-footer input[type="text"] {
+  width: 100%;
+  height: inherit;
+  outline: none;
+}
+#chat-content {
+  width: inherit;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(255, 255, 255);
+  word-break: break-all;
+}
+#chat-content p {
+  border-bottom: rgba(47, 47, 47, 0.205) 0.05vh solid;
+  margin-bottom: 1vh;
+}
+
+.bar-body {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.closed-body {
+  display: none;
+}
+
+/****************   friends-BAR   ****************/
+#friends-bar {
+  width: 17vw;
+  position: absolute;
+  bottom: 0px;
+  left: 18.7vw;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 0px;
+  border-radius: 1vw 1vw 0px 0px;
+
+  overflow: hidden;
+
+  z-index: 2;
+}
+#friends-head {
+  width: inherit;
+  height: 8vh;
+  position: relative;
+  padding: 2vh 0vw 2vh 6vw;
+
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+
+  background-color: rgba(2, 68, 112);
+  color: rgb(24, 24, 24);
+
+  cursor: pointer;
+}
+#friends-head h4 {
+  margin: 0px;
+}
+#friends-body {
+  width: inherit;
+  background-color: rgb(255, 255, 255);
+  word-break: break-all;
+  overflow: auto;
+}
+#friends-body p {
+  border-bottom: rgba(47, 47, 47, 0.205) 0.05vh solid;
+  margin-bottom: 1vh;
+}
+
+/****************   SELECT-PLAYERS   ****************/
+
+.candidate-player {
+  cursor: pointer;
+}
+
+.selected-player {
+  background-color: rgba(70, 80, 70, 0.74);
+  color: white;
+}
+
+/****************   GAME   ****************/
+
+#piles-div {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  position: absolute;
+  bottom: 0%;
+}
+
+.pile {
+  width: 8.2vw;
+  max-height: 10vh;
+
+  margin: 1%;
+
+  position: relative;
+  bottom: 0%;
+
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.block {
+  width: inherit;
+  height: 6vh;
+
+  padding: 7%;
+  margin: 1%;
+
+  text-align: center;
+  font-size: 3vh;
+
+  background-color: rgb(58, 57, 56);
+  color: white;
+}
+
+.pick-block-btn {
+  margin-top: 3vh;
+}
+
+input[type="button"] {
+  font-size: 3vh;
+}
+
+.friend-msg {
+  background-color: rgb(246, 246, 191);
+}
+.my-msg {
+  background-color: rgb(191, 246, 241);
+}
+
+/**************************************/
+#logging-div {
+  width: 30%;
+  height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20vh;
+}
+
+.room-head-section {
+  width: 15%;
+  overflow: auto;
+  margin: 1vh;
+}
+
+#new-game-btn,
+#end-game-btn {
+  width: 20vh;
+  height: 11.5vh;
+  position: absolute;
+  left: 16%;
+  bottom: 87.2vh;
+}
+
+#init-game-div {
+  width: 40vw;
+  max-height: 40vh;
+  overflow: auto;
+
+  padding: 2vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2vh;
+
+  border: solid rgb(142, 140, 132) 0.5vh;
+  border-radius: 3vh;
+
+  background-color: rgb(255, 255, 255);
+
+  font-size: large;
+}
+
+#init-game-div input[type="button"] {
+  margin-top: 4vh;
+}
+
+#handle-bottom-piles {
+  width: 30%;
+  height: 73vh;
+  position: absolute;
+  left: 9%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#end-turn-btn {
+  margin-left: 2vw;
+}
+
+#current-playres {
+  width: 12vw;
+
+  position: absolute;
+  right: 12px;
+  top: 0px;
+
+  background-color: rgb(68, 70, 70);
+  color: white;
+}
+#current-playres div {
+  border: solid white 0.1vh;
+  padding: 1vw;
+}
+
+#current-player {
+  background-color: rgb(2, 68, 112);
+}
+#current-player::before {
+  content: ">  ";
+}
+
+#winner-div {
+  width: 60%;
+  background-color: rgb(104, 238, 104);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+
+  box-shadow: 5px 5px 5px 5px rgb(174, 251, 174),
+    -5px 5px 5px 5px rgb(174, 251, 174), 5px -5px 5px 5px rgb(174, 251, 174),
+    -5px -5px 5px 5px rgb(174, 251, 174);
+}
