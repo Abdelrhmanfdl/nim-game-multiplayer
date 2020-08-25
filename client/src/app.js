@@ -64,7 +64,6 @@ class App extends React.Component {
       appState: "init",
       socket: socket,
     };
-    this.setSocketEvents = this.setSocketEvents.bind(this);
     this.changeAppState = this.changeAppState.bind(this);
   }
 
