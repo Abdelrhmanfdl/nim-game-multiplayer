@@ -2,10 +2,13 @@
   "name": "nim-game",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx webpack"
+    "start": "npm ./back-end/server.js"
+  },
+  "engines": {
+    "node": "v10.16.3"
   },
   "keywords": [],
   "author": "Abdelrhman ahmed fadl",
