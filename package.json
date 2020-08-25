@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm ./back-end/server.js"
+    "start": "node ./back-end/server.js"
   },
   "engines": {
     "node": "v10.16.3"
