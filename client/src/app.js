@@ -66,8 +66,6 @@ class App extends React.Component {
     };
     this.setSocketEvents = this.setSocketEvents.bind(this);
     this.changeAppState = this.changeAppState.bind(this);
-
-    this.setSocketEvents();
   }
 
   changeAppState(roomId, username, role, people) {
