@@ -59,7 +59,8 @@ class Init extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    let socket = io("http://localhost:8080");
+    console.log(location.origin);
+    let socket = io(location.origin);
     this.state = {
       appState: "init",
       socket: socket,
