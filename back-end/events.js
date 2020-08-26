@@ -117,27 +117,20 @@ let join = function (data, socket, ioServer) {
 
   // Get the room
   roomModel.findOne({ _id: roomId }, async (err, room) => {
-    if (room === undefined) {
-      socket.emit("responseForRoom", {
-        success: false,
-      });
-      return;
-    } else {
-      socket.join(roomId);
-      room.people.push({
-        id: socketId,
-        username,
-      });
-      room.save();
-      socket.emit("responseForRoom", {
-        success: true,
-        username,
-        roomId,
-        role: "visitor",
-        people: room.people,
-      });
-      broadcastAllPeople(room, ioServer, roomId);
-    }
+    socket.join(roomId);
+    room.people.push({
+      id: socketId,
+      username,
+    });
+    room.save();
+    socket.emit("responseForRoom", {
+      success: true,
+      username,
+      roomId,
+      role: "visitor",
+      people: room.people,
+    });
+    broadcastAllPeople(room, ioServer, roomId);
   });
 
   socket.on("disconnect", () => {
