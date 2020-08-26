@@ -37,7 +37,7 @@ ioServer.on("connection", (socket) => {
   socket.on("host", (data) => events.host(data, socket, ioServer));
   socket.on("join", (data) => {
     roomModel.findOne({ _id: data.roomId }, async (err, room) => {
-      if (room === undefined) {
+      if (!room) {
         socket.emit("responseForRoom", {
           success: false,
         });
