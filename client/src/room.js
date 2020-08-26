@@ -42,6 +42,7 @@ class Chat extends React.Component {
   handleSendMessage(e) {
     const txt = document.getElementById("chat-txt"),
       msg = txt.value;
+    if (msg == "") return;
     txt.value = "";
     this.props.socket.emit("newMessage", {
       username: this.props.username,

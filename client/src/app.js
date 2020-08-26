@@ -9,7 +9,7 @@ class Init extends React.Component {
       "responseForRoom",
       ({ success, roomId, username, role, people }) => {
         if (success === false) {
-          console.log("Failed");
+          alert("Failed to connect this room");
           return;
         }
         this.props.changeAppState(roomId, username, role, people);
