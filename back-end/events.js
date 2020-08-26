@@ -117,8 +117,8 @@ let join = function (data, socket, ioServer) {
 
   // Get the room
   roomModel.findOne({ _id: roomId }, async (err, room) => {
-    if (room === null) {
-      socket.emit("join", {
+    if (room === undefined) {
+      socket.emit("responseForRoom", {
         success: false,
       });
       return;
