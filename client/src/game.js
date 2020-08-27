@@ -8,6 +8,7 @@ class Game extends React.Component {
       remainPiles: null,
       winner: null,
       piles: null,
+      playerOut: false, // is true when the non-owner player gets out of the game
     };
 
     this.listenEvents = this.listenEvents.bind(this);
@@ -23,12 +24,16 @@ class Game extends React.Component {
         piles: gameState.gamePiles,
         players: gameState.players,
         turn: gameState.turn,
+        winner: gameState.winner,
         pilePickedFrom: gameState.pilePickedFrom,
         remainPiles: gameState.remainPiles,
       });
     });
     this.props.socket.on("doneGame", ({ winner }) => {
       this.setState({ winner: winner });
+    });
+    this.props.socket.on("playerOut", ({ winner }) => {
+      this.setState({ winner: winner, playerOut: true });
     });
   }
 
@@ -47,6 +52,7 @@ class Game extends React.Component {
           gamePiles: newPiles,
           players: this.state.players,
           turn: this.state.turn,
+          winner: null,
           pilePickedFrom: i,
           remainPiles: newRemainPiles,
         };
@@ -68,6 +74,7 @@ class Game extends React.Component {
         players: this.state.players,
         turn: 1 - this.state.turn,
         pilePickedFrom: null,
+        winner: null,
         remainPiles: this.state.remainPiles,
       };
       this.props.socket.emit("gameEvent", dataToSend);
@@ -139,6 +146,9 @@ class Game extends React.Component {
       return (
         <div id="winner-div" class="jumbotron">
           <h1 class="display-4">{winnerUserName} won the game!</h1>
+          {this.state.playerOut === true ? (
+            <small>The other player is out.</small>
+          ) : null}
         </div>
       );
     }

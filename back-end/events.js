@@ -23,13 +23,19 @@ const handleGameEvent = (roomId, socket, ioServer, gameState) => {
       console.log(err.message);
     } else if (room) {
       room.gameState = gameState;
-      room.save();
+      room.save((err, room) => {
+        if (err) console.log("Failed to save the game state.");
+        broadcastGameState(room, ioServer, roomId);
 
-      if (gameState.remainPiles === 0) {
-        ioServer.sockets
-          .in(roomId)
-          .emit("doneGame", { winner: gameState.turn });
-      } else broadcastGameState(room, ioServer, roomId);
+        if (gameState.remainPiles === 0) {
+          ioServer.sockets
+            .in(roomId)
+            .emit("doneGame", { winner: gameState.turn });
+          room.gameState.winner = gameState.turn;
+          room.markModified("gameState");
+          room.save();
+        }
+      });
     } else {
       console.log("No room exists");
     }
@@ -69,6 +75,7 @@ let host = function (data, socket, ioServer) {
     socket.on("changeRoomState", (newState) => {
       roomModel.findOne({ _id: roomId }, (err, room) => {
         room.roomState = newState;
+        if (newState !== "game") room.gameState = null;
         room.save();
       });
       ioServer.sockets.in(roomId).emit("changeRoomState", newState);
@@ -143,8 +150,26 @@ let join = function (data, socket, ioServer) {
           return doc.id === socketId;
         });
         room.people.splice(visitorIndex, 1);
-        room.save().catch((err) => console.log("Room is deleted..."));
-        broadcastAllPeople(room, ioServer, roomId);
+        room.save((err, room) => {
+          broadcastAllPeople(room, ioServer, roomId);
+          if (room.gameState !== null && room.gameState.winner === null) {
+            if (socket.id === room.gameState.players[0].id) {
+              socket.in(roomId).emit("playerOut", { winner: 1 });
+              room.gameState.winner = 1;
+              room.markModified("gameState");
+              room.save((err) => {
+                if (err) console.log(err.message);
+              });
+            } else if (socket.id === room.gameState.players[1].id) {
+              socket.in(roomId).emit("playerOut", { winner: 0 });
+              room.gameState.winner = 0;
+              room.markModified("gameState");
+              room.save((err) => {
+                if (err) console.log(err.message);
+              });
+            }
+          }
+        });
       } else {
         console.log("Room is deleted...");
       }

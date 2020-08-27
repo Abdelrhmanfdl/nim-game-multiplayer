@@ -163,6 +163,7 @@ class InitGame extends React.Component {
         players,
         turn,
         pilePickedFrom: null,
+        winner: null,
         remainPiles: gamePiles.length,
       });
     }
